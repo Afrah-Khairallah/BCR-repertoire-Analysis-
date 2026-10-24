@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite it as below."
+title: "Bulk BCR repertoire analysis"
+authors:
+  - family-names: Khairallah
+    given-names: Afrah
+    affiliation: Africa Health Research Institute
+version: 1.1.0
+doi: 10.5281/zenodo.23596884
+date-released: 2026-10-24
+license: MIT
+keywords:
+  - B cell receptor
+  - AIRR-seq
+  - immune repertoire
+  - pRESTO
+  - Immcantation
+  - HIV

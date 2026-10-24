@@ -1,0 +1,34 @@
+{
+  "title": "Bulk BCR repertoire analysis",
+  "upload_type": "software",
+  "description": "Code used to process (pRESTO, IgBLAST, Change-O) and analyse (gene usage, SHM, CDR3, clonality) bulk UMI-based B cell receptor repertoire sequencing of 272 libraries (IgG, IgM, Igκ, Igλ; two technical replicates) from 34 FRESH cohort participants. Includes primer sequences.",
+  "creators": [
+    {
+      "name": "Khairallah, Afrah",
+      "affiliation": "Africa Health Research Institute"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "B cell receptor",
+    "AIRR-seq",
+    "immune repertoire",
+    "pRESTO",
+    "Immcantation",
+    "HIV"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.23597516",
+      "relation": "isSupplementTo",
+      "resource_type": "dataset",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1550093",
+      "relation": "isSupplementTo",
+      "resource_type": "dataset",
+      "scheme": "url"
+    }
+  ]
+}

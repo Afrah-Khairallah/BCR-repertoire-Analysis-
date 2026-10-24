@@ -1,0 +1,16 @@
+# keep data and outputs out of the repository
+*.fastq
+*.fastq.gz
+*.fasta
+*.tsv.gz
+*.fmt7
+*.tar
+*.tar.gz
+*.zst
+*.pdf
+*.png
+*.rds
+*.RData
+.Rhistory
+Output/
+logs/
