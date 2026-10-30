@@ -1,0 +1,658 @@
+*pre-processing
+
+
+*remove duplicates
+**remove duplicated sequence_id within sample (possibley across replicates)
+duplicates report sequence_id sample
+
+duplicates drop sequence_id sample, force
+
+
+**remove duplicates of similar VDJ (clones)
+
+duplicates report v_call j_call junction junction_aa sample
+
+duplicates tag v_call j_call junction junction_aa sample, gen(dups_vdj)
+
+duplicates drop v_call j_call junction junction_aa sample, force
+
+
+
+*gen cdrh3 lenghth variable
+
+gen CDRH3_length_aa = (junction_length/3)-2
+
+**separate V predictions
+split v_call, p(",")
+
+rename v_call1 v_call1_allele
+
+rename v_call2 v_call2_allele
+
+rename v_call3 v_call3_allele
+
+
+gen v_call1_gene=v_call1_allele
+split v_call1_gene, p("*")
+drop v_call1_gene2 v_call1_gene
+rename v_call1_gene1 v_call1_gene
+
+
+gen v_call2_gene=v_call2_allele
+split v_call2_gene, p("*")
+drop v_call2_gene2 v_call2_gene
+rename v_call2_gene1 v_call2_gene
+
+
+gen v_call3_gene=v_call3_allele
+split v_call3_gene, p("*")
+drop v_call3_gene2 v_call3_gene
+rename v_call3_gene1 v_call3_gene
+
+
+
+
+gen v_call1_family=v_call1_gene
+split v_call1_family, p("-")
+drop v_call1_family  v_call1_family2 v_call1_family3 
+rename v_call1_family1 v_call1_family
+
+
+gen v_call2_family=v_call2_gene
+split v_call2_family, p("-")
+drop v_call2_family  v_call2_family2 v_call2_family3 
+rename v_call2_family1 v_call2_family
+
+
+gen v_call3_family=v_call3_gene
+split v_call3_family, p("-")
+drop v_call3_family  v_call3_family2 v_call3_family3 
+rename v_call3_family1 v_call3_family
+
+
+
+
+
+
+**separate D predictions
+split d_call, p(",")
+
+rename d_call1 d_call1_allele
+
+rename d_call2 d_call2_allele
+
+rename d_call3 d_call3_allele
+
+
+gen d_call1_gene=d_call1_allele
+split d_call1_gene, p("*")
+drop d_call1_gene2 d_call1_gene
+rename d_call1_gene1 d_call1_gene
+
+
+gen d_call2_gene=d_call2_allele
+split d_call2_gene, p("*")
+drop d_call2_gene2 d_call2_gene
+rename d_call2_gene1 d_call2_gene
+
+
+gen d_call3_gene=d_call3_allele
+split d_call3_gene, p("*")
+drop d_call3_gene2 d_call3_gene
+rename d_call3_gene1 d_call3_gene
+
+
+
+**separate J predictions
+
+split j_call, p(",")
+
+rename j_call1 j_call1_allele
+
+rename j_call2 j_call2_allele
+
+rename j_call3 j_call3_allele
+
+
+gen j_call1_gene=j_call1_allele
+split j_call1_gene, p("*")
+drop j_call1_gene2 j_call1_gene
+rename j_call1_gene1 j_call1_gene
+
+
+gen j_call2_gene=j_call2_allele
+split j_call2_gene, p("*")
+drop j_call2_gene2 j_call2_gene
+rename j_call2_gene1 j_call2_gene
+
+
+gen j_call3_gene=j_call3_allele
+split j_call3_gene, p("*")
+drop j_call3_gene2 j_call3_gene
+rename j_call3_gene1 j_call3_gene
+
+
+
+
+***Junction 
+**generate CDRH3 aa from Junction aa
+generate jun_less_aa1 = substr(junction_aa, 2,.)
+gen cdrh3_aa= substr(jun_less_aa1, 1, strlen(jun_less_aa1) - 1)
+
+*split AAs into variables
+
+gen cdrh3_aa1 = substr(cdrh3_aa, 1, 1)
+gen cdrh3_aa2 = substr(cdrh3_aa, 2, 1)
+gen cdrh3_aa3 = substr(cdrh3_aa, 3, 1)
+gen cdrh3_aa4 = substr(cdrh3_aa, 4, 1)
+gen cdrh3_aa5 = substr(cdrh3_aa, 5, 1)
+gen cdrh3_aa6 = substr(cdrh3_aa, 6, 1)
+gen cdrh3_aa7 = substr(cdrh3_aa, 7, 1)
+gen cdrh3_aa8 = substr(cdrh3_aa, 8, 1)
+gen cdrh3_aa9 = substr(cdrh3_aa, 9, 1)
+gen cdrh3_aa10 = substr(cdrh3_aa, 10, 1)
+gen cdrh3_aa11 = substr(cdrh3_aa, 11, 1)
+gen cdrh3_aa12 = substr(cdrh3_aa, 12, 1)
+gen cdrh3_aa13 = substr(cdrh3_aa, 13, 1)
+gen cdrh3_aa14 = substr(cdrh3_aa, 14, 1)
+gen cdrh3_aa15 = substr(cdrh3_aa, 15, 1)
+gen cdrh3_aa16 = substr(cdrh3_aa, 16, 1)
+gen cdrh3_aa17 = substr(cdrh3_aa, 17, 1)
+gen cdrh3_aa18 = substr(cdrh3_aa, 18, 1)
+gen cdrh3_aa19 = substr(cdrh3_aa, 19, 1)
+gen cdrh3_aa20 = substr(cdrh3_aa, 20, 1)
+gen cdrh3_aa21 = substr(cdrh3_aa, 21, 1)
+gen cdrh3_aa22 = substr(cdrh3_aa, 22, 1)
+gen cdrh3_aa23 = substr(cdrh3_aa, 23, 1)
+gen cdrh3_aa24 = substr(cdrh3_aa, 24, 1)
+gen cdrh3_aa25 = substr(cdrh3_aa, 25, 1)
+gen cdrh3_aa26 = substr(cdrh3_aa, 26, 1)
+gen cdrh3_aa27 = substr(cdrh3_aa, 27, 1)
+gen cdrh3_aa28 = substr(cdrh3_aa, 28, 1)
+gen cdrh3_aa29 = substr(cdrh3_aa, 29, 1)
+gen cdrh3_aa30 = substr(cdrh3_aa, 30, 1)
+gen cdrh3_aa31 = substr(cdrh3_aa, 31, 1)
+gen cdrh3_aa32 = substr(cdrh3_aa, 32, 1)
+
+**10E8 class
+*define sequences with CDRH3 of 21022aa and 23-24aa
+gen cdrh3length_21aa=1 if CDRH3_length_aa==21
+gen cdrh3length_22aa=1 if CDRH3_length_aa==22
+gen cdrh3length_23aa=1 if CDRH3_length_aa==23
+gen cdrh3length_24aa=1 if CDRH3_length_aa==24
+
+
+gen cdrh3length_21_22aa=1 if cdrh3length_21aa==1
+replace cdrh3length_21_22aa=1 if cdrh3length_22aa==1
+
+gen cdrh3length_23_24aa=1 if cdrh3length_23aa==1
+replace cdrh3length_23_24aa=1 if cdrh3length_24aa==1
+
+** check for Y.FW motif at pos 7 for 21-22aa
+gen y_pos7_21_22aa=1 if cdrh3_aa7=="Y" & cdrh3length_21_22aa==1
+gen f_pos9_21_22aa=1 if cdrh3_aa9=="F" & cdrh3length_21_22aa==1
+gen w_pos10_21_22aa=1 if cdrh3_aa10=="W" & cdrh3length_21_22aa==1
+
+gen yfw_pos7_21_22aa_score=y_pos7_21_22aa + f_pos9_21_22aa + w_pos10_21_22aa
+gen y_fw_pos7_21_22aa=1 if yfw_pos7_21_22aa_score==3
+
+**Y.FW motif at pos 8 for 23-24aa
+gen y_pos8_23_24aa=1 if cdrh3_aa8=="Y" & cdrh3length_23_24aa==1
+gen f_pos10_23_24aa=1 if cdrh3_aa10=="F" & cdrh3length_23_24aa==1
+gen w_pos11_23_24aa=1 if cdrh3_aa11=="W" & cdrh3length_23_24aa==1
+
+gen yfw_pos8_23_24aa_score=y_pos8_23_24aa + f_pos10_23_24aa + w_pos11_23_24aa
+gen y_fw_pos8_23_24aa=1 if yfw_pos8_23_24aa_score==3
+
+
+* Y.FW motif at the correct position (10E8-like CDRH3)
+gen yfw_motif_correct_pos=1 if y_fw_pos7_21_22aa==1
+replace yfw_motif_correct_pos=1 if y_fw_pos8_23_24aa==1
+
+gen CDRH3_10E8_like="TRUE" if yfw_motif_correct_pos==1
+
+*10E8-like v gene
+
+gen vgene10E8=1 if v_call1_gene=="IGHV3-15"
+replace vgene10E8=1 if v_call1_gene=="IGHV3-49"
+replace vgene10E8=1 if v_call1_gene=="IGHV3-72"
+replace vgene10E8=1 if v_call1_gene=="IGHV3-73"
+
+replace vgene10E8=1 if v_call2_gene=="IGHV3-15"
+replace vgene10E8=1 if v_call2_gene=="IGHV3-49"
+replace vgene10E8=1 if v_call2_gene=="IGHV3-72"
+replace vgene10E8=1 if v_call2_gene=="IGHV3-73"
+
+
+replace vgene10E8=1 if v_call3_gene=="IGHV3-15"
+replace vgene10E8=1 if v_call3_gene=="IGHV3-49"
+replace vgene10E8=1 if v_call3_gene=="IGHV3-72"
+replace vgene10E8=1 if v_call3_gene=="IGHV3-73"
+
+gen full_10E8_class="TRUE" if yfw_motif_correct_pos==1 & vgene10E8==1
+
+
+
+
+
+**LN01 class
+gen cdrh3length_20aa_b=1 if CDRH3_length_aa==20
+gen cdrh3length_21aa_b=1 if CDRH3_length_aa==21
+gen cdrh3length_22aa_b=1 if CDRH3_length_aa==22
+gen cdrh3length_23aa_b=1 if CDRH3_length_aa==23
+
+gen cdrh3length_21_22aa_b=1 if cdrh3length_21aa_b==1
+replace cdrh3length_21_22aa_b=1 if cdrh3length_22aa_b==1
+
+
+**FW...[YF]..[WFY] motif at pos 8 for 20aa
+
+gen f_pos8_20aa_b=1 if cdrh3_aa8=="F" & cdrh3length_20aa_b==1
+gen w_pos9_20aa_b=1 if cdrh3_aa9=="W" & cdrh3length_20aa_b==1
+
+gen y_pos13_20aa_b=1 if cdrh3_aa13=="Y" & cdrh3length_20aa_b==1
+gen f_pos13_20aa_b=1 if cdrh3_aa13=="F" & cdrh3length_20aa_b==1
+gen yf_pos13_20aa_b=1 if y_pos13_20aa_b==1 | f_pos13_20aa_b==1
+
+
+gen w_pos16_20aa_b=1 if cdrh3_aa16=="W" & cdrh3length_20aa_b==1
+gen f_pos16_20aa_b=1 if cdrh3_aa16=="F" & cdrh3length_20aa_b==1
+gen y_pos16_20aa_b=1 if cdrh3_aa16=="Y" & cdrh3length_20aa_b==1
+gen wfy_pos16_20aa_b=1 if  w_pos16_20aa_b==1| f_pos16_20aa_b==1| y_pos16_20aa_b==1
+
+gen fw_yf_wfy_correct_pos_20aa=1 if f_pos8_20aa_b==1 & w_pos9_20aa_b==1 & yf_pos13_20aa_b==1 & wfy_pos16_20aa_b==1
+
+
+**FW...[YF]..[WFY] motif at pos 9 for 21-22aa
+
+gen f_pos9_21_22aa_b=1 if cdrh3_aa9=="F" & cdrh3length_21_22aa_b==1
+gen w_pos10_21_22aa_b=1 if cdrh3_aa10=="W" & cdrh3length_21_22aa_b==1
+
+gen y_pos14_21_22aa_b=1 if cdrh3_aa14=="Y" & cdrh3length_21_22aa_b==1
+gen f_pos14_21_22aa_b=1 if cdrh3_aa14=="F" & cdrh3length_21_22aa_b==1
+gen yf_pos14_21_22aa_b=1 if y_pos14_21_22aa_b==1 | f_pos14_21_22aa_b==1
+
+gen w_pos17_21_22aa_b=1 if cdrh3_aa17=="W" & cdrh3length_21_22aa_b==1
+gen f_pos17_21_22aa_b=1 if cdrh3_aa17=="F" & cdrh3length_21_22aa_b==1
+gen y_pos17_21_22aa_b=1 if cdrh3_aa17=="Y" & cdrh3length_21_22aa_b==1
+gen wfy_pos17_21_22aa_b=1 if  w_pos17_21_22aa_b==1| f_pos17_21_22aa_b==1| y_pos17_21_22aa_b==1
+
+
+gen fw_yf_wfy_correct_pos_21_22aa=1 if f_pos9_21_22aa_b==1 & w_pos10_21_22aa_b==1 & yf_pos14_21_22aa_b==1 & wfy_pos17_21_22aa_b==1
+
+
+
+**FW...[YF]..[WFY] motif at pos 10 for 23aa
+
+gen f_pos10_23aa_b=1 if cdrh3_aa10=="F" & cdrh3length_23aa_b==1
+gen w_pos11_23aa_b=1 if cdrh3_aa11=="W" & cdrh3length_23aa_b==1
+
+gen y_pos15_23aa_b=1 if cdrh3_aa15=="Y" & cdrh3length_23aa_b==1
+gen f_pos15_23aa_b=1 if cdrh3_aa15=="F" & cdrh3length_23aa_b==1
+gen yf_pos15_23aa_b=1 if y_pos15_23aa_b==1 | f_pos15_23aa_b==1
+
+
+gen w_pos18_23aa_b=1 if cdrh3_aa18=="W" & cdrh3length_23aa_b==1
+gen f_pos18_23aa_b=1 if cdrh3_aa18=="F" & cdrh3length_23aa_b==1
+gen y_pos18_23aa_b=1 if cdrh3_aa18=="Y" & cdrh3length_23aa_b==1
+gen wfy_pos18_23aa_b=1 if  w_pos18_23aa_b==1| f_pos18_23aa_b==1| y_pos18_23aa_b==1
+
+gen fw_yf_wfy_correct_pos_23aa=1 if f_pos10_23aa_b==1 & w_pos11_23aa_b==1 & yf_pos15_23aa_b==1 & wfy_pos18_23aa_b==1
+
+***FW...[YF]..[WFY] motif at any correct position for matching cdrh3 lenghth
+
+gen fw_yf_wfy_correct_pos=1 if fw_yf_wfy_correct_pos_20aa==1| fw_yf_wfy_correct_pos_21_22aa==1| fw_yf_wfy_correct_pos_23aa==1 
+
+gen CDRH3_LN01_like="TRUE" if fw_yf_wfy_correct_pos==1
+
+
+*LN01 v gene
+
+gen vgeneLN01=1 if v_call1_gene=="IGHV4-39"
+replace vgeneLN01=1 if v_call1_gene=="IGHV4-59"
+
+replace vgeneLN01=1 if v_call2_gene=="IGHV4-39"
+replace vgeneLN01=1 if v_call2_gene=="IGHV4-59"
+
+
+replace vgeneLN01=1 if v_call3_gene=="IGHV4-39"
+replace vgeneLN01=1 if v_call3_gene=="IGHV4-59"
+
+
+gen full_LN01_class="TRUE" if fw_yf_wfy_correct_pos==1 & vgeneLN01==1
+
+
+
+
+***PCT64 class
+
+gen cdrh3length_25aa_c=1 if CDRH3_length_aa==25
+
+gen y_pos7_25aa=1 if cdrh3_aa7=="Y" & cdrh3length_25aa_c==1
+gen r_pos7_25aa=1 if cdrh3_aa7=="R" & cdrh3length_25aa_c==1
+gen k_pos7_25aa=1 if cdrh3_aa7=="K" & cdrh3length_25aa_c==1
+gen g_pos7_25aa=1 if cdrh3_aa7=="G" & cdrh3length_25aa_c==1
+
+gen yrkg_pos7_25aa=1 if y_pos7_25aa==1 | r_pos7_25aa==1 | k_pos7_25aa==1 | g_pos7_25aa==1
+
+
+gen d_pos8_25aa=1 if cdrh3_aa8=="D" & cdrh3length_25aa_c==1
+gen s_pos8_25aa=1 if cdrh3_aa8=="S" & cdrh3length_25aa_c==1
+gen g_pos8_25aa=1 if cdrh3_aa8=="G" & cdrh3length_25aa_c==1
+
+gen dsg_pos8_25aa=1 if d_pos8_25aa==1 | s_pos8_25aa==1 | g_pos8_25aa==1 
+
+
+gen f_pos9_25aa=1 if cdrh3_aa9=="F" & cdrh3length_25aa_c==1
+gen w_pos10_25aa=1 if cdrh3_aa10=="W" & cdrh3length_25aa_c==1
+gen s_pos11_25aa=1 if cdrh3_aa11=="S" & cdrh3length_25aa_c==1
+
+gen pct64_like_cdrh3="TRUE" if yrkg_pos7_25aa==1 & dsg_pos8_25aa==1 & f_pos9_25aa==1 & w_pos10_25aa==1 & s_pos11_25aa==1
+
+
+
+gen IGHV3family=1 if v_call1_family=="IGHV3"
+replace IGHV3family=1 if v_call2_family=="IGHV3"
+replace IGHV3family=1 if v_call3_family=="IGHV3"
+
+
+gen jh_6_gene=1 if j_call1_gene=="IGHJ6"
+replace jh_6_gene=1 if j_call2_gene=="IGHJ6"
+replace jh_6_gene=1 if j_call3_gene=="IGHJ6"
+
+
+gen PCT64_class="TRUE" if pct64_like_cdrh3=="TRUE" & IGHV3family==1 & jh_6_gene==1
+
+
+
+***CH01-CH04 class
+
+gen cdrh3length_26aa_d=1 if CDRH3_length_aa==26
+
+gen y_pos15_26aa=1 if cdrh3_aa15=="Y" & cdrh3length_26aa_d==1
+
+gen y_pos16_26aa=1 if cdrh3_aa16=="Y" & cdrh3length_26aa_d==1
+gen q_pos16_26aa=1 if cdrh3_aa16=="Q" & cdrh3length_26aa_d==1
+gen k_pos16_26aa=1 if cdrh3_aa16=="K" & cdrh3length_26aa_d==1
+
+gen yqk_pos16_26aa=1 if y_pos16_26aa==1  | q_pos16_26aa==1  |  k_pos16_26aa==1
+
+
+gen g_pos17_26aa=1 if cdrh3_aa17=="G" & cdrh3length_26aa_d==1
+gen s_pos18_26aa=1 if cdrh3_aa18=="S" & cdrh3length_26aa_d==1
+gen g_pos19_26aa=1 if cdrh3_aa19=="G" & cdrh3length_26aa_d==1
+
+
+gen ch04_like_cdrh3="TRUE" if y_pos15_26aa==1 & yqk_pos16_26aa==1 & g_pos17_26aa==1 & s_pos18_26aa==1 & g_pos19_26aa==1
+
+
+gen jh_2_gene=1 if j_call1_gene=="IGHJ2"
+replace jh_2_gene=1 if j_call2_gene=="IGHJ2"
+replace jh_2_gene=1 if j_call3_gene=="IGHJ2"
+
+
+gen ch04_class="TRUE" if ch04_like_cdrh3=="TRUE" & IGHV3family==1 & jh_2_gene==1
+
+
+
+
+**PG9/PG16 class
+
+
+gen cdrh3length_30aa_e=1 if CDRH3_length_aa==30
+
+
+gen y_pos16_30aa=1 if cdrh3_aa16=="Y" & cdrh3length_30aa_e==1
+gen d_pos17_30aa=1 if cdrh3_aa17=="D" & cdrh3length_30aa_e==1
+gen f_pos18_30aa=1 if cdrh3_aa18=="F" & cdrh3length_30aa_e==1
+
+
+
+gen pg9_like_cdrh3="TRUE" if y_pos16_30aa==1 & d_pos17_30aa==1 & f_pos18_30aa==1
+
+
+
+gen pg9_class="TRUE" if pg9_like_cdrh3=="TRUE" & IGHV3family==1 & jh_6_gene==1
+
+
+
+**PGT/PGDM
+
+gen cdrh3length_33_34aa_f=1 if CDRH3_length_aa==33 | CDRH3_length_aa==34
+
+gen y_pos14_33_34aa=1 if cdrh3_aa14=="Y" & cdrh3length_33_34aa_f==1
+
+gen g_pos15_33_34aa=1 if cdrh3_aa15=="G" & cdrh3length_33_34aa_f==1
+gen n_pos15_33_34aa=1 if cdrh3_aa15=="N" & cdrh3length_33_34aa_f==1
+gen d_pos15_33_34aa=1 if cdrh3_aa15=="D" & cdrh3length_33_34aa_f==1
+
+gen gnd_pos15_33_34aa=1 if g_pos15_33_34aa==1  | n_pos15_33_34aa==1 | d_pos15_33_34aa==1
+
+
+gen d_pos16_33_34aa=1 if cdrh3_aa16=="D" & cdrh3length_33_34aa_f==1
+gen e_pos16_33_34aa=1 if cdrh3_aa16=="E" & cdrh3length_33_34aa_f==1
+gen y_pos16_33_34aa=1 if cdrh3_aa16=="Y" & cdrh3length_33_34aa_f==1
+
+gen dey_pos16_33_34aa=1 if d_pos16_33_34aa==1  | e_pos16_33_34aa==1 | y_pos16_33_34aa==1 
+
+
+
+gen pgt145_like_cdrh3="TRUE" if y_pos14_33_34aa==1 & gnd_pos15_33_34aa==1 & dey_pos16_33_34aa==1
+
+
+gen IGHV1family=1 if v_call1_family=="IGHV1"
+replace IGHV1family=1 if v_call2_family=="IGHV1"
+replace IGHV1family=1 if v_call3_family=="IGHV1"
+
+
+
+gen pgt145_class="TRUE" if pgt145_like_cdrh3=="TRUE"  & IGHV1family==1 & jh_6_gene==1
+
+
+
+
+
+
+
+
+
+
+
+**CAP256
+
+gen cdrh3length_37or39aa_g=1 if CDRH3_length_aa==37 | CDRH3_length_aa==39
+
+gen y_pos17_37or39aa=1 if cdrh3_aa17=="Y" & cdrh3length_37or39aa_g==1
+gen d_pos18_37or39aa=1 if cdrh3_aa18=="D" & cdrh3length_37or39aa_g==1
+
+gen f_pos19_37or39aa=1 if cdrh3_aa19=="F" & cdrh3length_37or39aa_g==1
+gen i_pos19_37or39aa=1 if cdrh3_aa19=="I" & cdrh3length_37or39aa_g==1
+gen l_pos19_37or39aa=1 if cdrh3_aa19=="L" & cdrh3length_37or39aa_g==1
+
+
+gen fil_pos19_37or39aa=1 if f_pos19_37or39aa==1  | i_pos19_37or39aa==1 | l_pos19_37or39aa==1
+
+
+gen cap256_like_cdrh3_37or39aa="TRUE" if y_pos17_37or39aa==1 & d_pos18_37or39aa==1 & fil_pos19_37or39aa==1
+
+
+
+
+gen cdrh3length_38aa_g=1 if CDRH3_length_aa==38 
+
+gen y_pos18_38aa=1 if cdrh3_aa18=="Y" & cdrh3length_38aa_g==1
+gen d_pos19_38aa=1 if cdrh3_aa19=="D" & cdrh3length_38aa_g==1
+
+gen f_pos20_38aa=1 if cdrh3_aa20=="F" & cdrh3length_38aa_g==1
+gen i_pos20_38aa=1 if cdrh3_aa20=="I" & cdrh3length_38aa_g==1
+gen l_pos20_38aa=1 if cdrh3_aa20=="L" & cdrh3length_38aa_g==1
+
+
+gen fil_pos20_38aa=1 if f_pos20_38aa==1  | i_pos20_38aa==1 | l_pos20_38aa==1
+
+gen cap256_like_cdrh3_38aa="TRUE" if y_pos18_38aa==1 & d_pos19_38aa==1 & fil_pos20_38aa==1
+
+gen cap256_like_cdrh3="TRUE" if cap256_like_cdrh3_37or39aa=="TRUE" | cap256_like_cdrh3_38aa=="TRUE"
+
+
+
+
+gen jh_3_gene=1 if j_call1_gene=="IGHJ3"
+replace jh_3_gene=1 if j_call2_gene=="IGHJ3"
+replace jh_3_gene=1 if j_call3_gene=="IGHJ3"
+
+
+
+
+gen cap256_class="TRUE" if cap256_like_cdrh3=="TRUE" & IGHV3family==1 & jh_3_gene==1
+
+
+
+
+
+**BG18 class
+**cdrh3_lenghth_aa≥22, D3-3, FGV starting at position 7, 8, 9, E at position 7 past FGV (example:.......FGV....E)"
+
+gen cdrh3length_over21aa_g=1 if CDRH3_length>21
+
+
+**pos 7 i.e ......FGV....E 
+
+gen f_pos7_over21aa=1 if cdrh3_aa7=="F" & cdrh3length_over21aa_g==1
+gen g_pos8_over21aa=1 if cdrh3_aa8=="G" & cdrh3length_over21aa_g==1
+gen v_pos9_over21aa=1 if cdrh3_aa9=="V" & cdrh3length_over21aa_g==1
+gen e_pos14_over21aa=1 if cdrh3_aa14=="E" & cdrh3length_over21aa_g==1
+
+gen fgvxxxxe_pos7=1 if f_pos7_over21aa==1 & g_pos8_over21aa==1 & v_pos9_over21aa==1 & e_pos14_over21aa==1
+
+
+**pos 8 i.e .......FGV....E
+
+gen f_pos8_over21aa=1 if cdrh3_aa8=="F" & cdrh3length_over21aa_g==1
+gen g_pos9_over21aa=1 if cdrh3_aa9=="G" & cdrh3length_over21aa_g==1
+gen v_pos10_over21aa=1 if cdrh3_aa10=="V" & cdrh3length_over21aa_g==1
+gen e_pos15_over21aa=1 if cdrh3_aa15=="E" & cdrh3length_over21aa_g==1
+
+gen fgvxxxxe_pos8=1 if f_pos8_over21aa==1 & g_pos9_over21aa==1 & v_pos10_over21aa==1 & e_pos15_over21aa==1
+
+
+**pos 9 i.e .......FGV....E
+
+gen f_pos9_over21aa=1 if cdrh3_aa9=="F" & cdrh3length_over21aa_g==1
+gen g_pos10_over21aa=1 if cdrh3_aa10=="G" & cdrh3length_over21aa_g==1
+gen v_pos11_over21aa=1 if cdrh3_aa11=="V" & cdrh3length_over21aa_g==1
+gen e_pos16_over21aa=1 if cdrh3_aa16=="E" & cdrh3length_over21aa_g==1
+
+gen fgvxxxxe_pos9=1 if f_pos9_over21aa==1 & g_pos10_over21aa==1 & v_pos11_over21aa==1 & e_pos16_over21aa==1
+
+
+gen fgvxxxxe_motif=1 if fgvxxxxe_pos7==1 | fgvxxxxe_pos8==1 | fgvxxxxe_pos9==1
+
+
+gen d3_3_gene_g=1 if d_call1_gene=="IGHD3-3"
+replace d3_3_gene_g=1 if d_call2_gene=="IGHD3-3"
+replace d3_3_gene_g=1 if d_call3_gene=="IGHD3-3"
+
+gen bg18_like_cdrh3= "TRUE" if  d3_3_gene_g==1 & fgvxxxxe_motif==1
+
+
+
+gen bg18_class= "TRUE" if  jh_6_gene==1 &  bg18_like_cdrh3=="TRUE"
+
+
+
+
+
+
+**Extract per participant CDRH3_LN01_like full_LN01_class full_10E8_class CDRH3_10E8_like
+
+tab sample CDRH3_10E8_like, m
+tab sample full_10E8_class, m
+
+
+tab sample CDRH3_LN01_like, m
+tab sample full_LN01_class, m
+
+
+tab sample pct64_like_cdrh3, m
+tab sample PCT64_class, m
+
+
+tab sample ch04_like_cdrh3, m
+tab sample ch04_class, m
+
+
+tab sample pg9_like_cdrh3, m
+tab sample pg9_class, m
+
+
+
+tab sample pgt145_like_cdrh3, m
+tab sample pgt145_class, m
+
+
+
+tab sample cap256_like_cdrh3, m
+tab sample cap256_class, m
+
+
+
+tab sample bg18_like_cdrh3, m
+tab sample bg18_class, m
+
+
+
+
+
+export excel sample hiv_status sequence_id sequence ///
+ v_call d_call j_call junction_aa  junction_length_nt cdrh3_aa CDRH3_length_aa ///
+ CDRH3_10E8_like full_10E8_class CDRH3_LN01_like full_LN01_class  pct64_like_cdrh3 ///
+ PCT64_class ch04_like_cdrh3  ch04_class pg9_like_cdrh3 pg9_class pgt145_like_cdrh3 ///
+ pgt145_class cap256_like_cdrh3 cap256_class bg18_like_cdrh3 bg18_class using ///
+ "C:\Users\DMuema.KAVICRLAPTOP87\OneDrive\Documents\KAVI\IMMBASE\IMMBASE 1.0 SA\MS 2026\Motifs analyses\H\bnAb_like_H.xls" ///
+ if CDRH3_10E8_like=="TRUE" | CDRH3_LN01_like=="TRUE" | pct64_like_cdrh3=="TRUE"| ///
+ ch04_like_cdrh3=="TRUE"| pg9_like_cdrh3=="TRUE"| pgt145_like_cdrh3=="TRUE" | cap256_like_cdrh3=="TRUE" | bg18_like_cdrh3=="TRUE", firstrow(variables)
+
+
+** recheck long CDRH3s
+
+gen long_cdrh3=1 if CDRH3_length_aa>20
+
+tab sample  long_cdrh3, m
+
+tab sample  hiv_status, m
+
+
+
+
+
+
+gen long_junct=1 if CDRH3_length_aa>18
+
+
+
+tab sample  long_junct, m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
